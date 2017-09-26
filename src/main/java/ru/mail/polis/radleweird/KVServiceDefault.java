@@ -2,6 +2,7 @@ package ru.mail.polis.radleweird;
 
 import com.sun.net.httpserver.HttpServer;
 import ru.mail.polis.KVService;
+import ru.mail.polis.radleweird.dao.Dao;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class KVServiceDefault implements KVService {
 
     private final HttpServer server;
     private final File dir;
+    private final Dao dao;
 
     public KVServiceDefault(int port, File dir) throws IOException {
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
