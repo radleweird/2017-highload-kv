@@ -9,8 +9,6 @@ import java.net.InetSocketAddress;
 
 public class KVServiceDefault implements KVService {
 
-    private final int STOP_DELAY = 5;
-
     private final HttpServer server;
     private final File dir;
 
@@ -26,6 +24,6 @@ public class KVServiceDefault implements KVService {
 
     @Override
     public void stop() {
-        server.stop(STOP_DELAY);
+        server.stop(0);
     }
 }
