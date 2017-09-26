@@ -1,11 +1,10 @@
 package ru.mail.polis.radleweird;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-
+import javax.xml.ws.spi.http.HttpExchange;
+import javax.xml.ws.spi.http.HttpHandler;
 import java.io.IOException;
 
-public class HttpErrorHandler implements HttpHandler{
+public class HttpErrorHandler extends HttpHandler {
 
     private final HttpHandler essence;
 

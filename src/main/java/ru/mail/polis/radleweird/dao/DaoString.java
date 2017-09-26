@@ -12,7 +12,7 @@ public class DaoString implements Dao<String> {
 
     @Override
     public void put(String key, String object) {
-        //TODO
+
     }
 
     @Override

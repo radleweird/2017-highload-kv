@@ -5,8 +5,6 @@ import ru.mail.polis.KVService;
 import ru.mail.polis.radleweird.dao.Dao;
 import ru.mail.polis.radleweird.dao.DaoString;
 
-import javax.xml.ws.spi.http.HttpExchange;
-import javax.xml.ws.spi.http.HttpHandler;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -20,14 +18,18 @@ public class KVServiceDefault implements KVService {
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
         this.dao = new DaoString(dir);
         initStatusHandler();
-        initGetPutHandler();
+        initGetHandler();
+        initPutHandler();
         initDeleteHandler();
     }
 
     private void initStatusHandler() {
     }
 
-    private void initGetPutHandler() {
+    private void initGetHandler() {
+    }
+
+    private void initPutHandler() {
     }
 
     private void initDeleteHandler() {
