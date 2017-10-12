@@ -115,7 +115,7 @@ public class KVServiceDefault implements KVService {
 
     private void sendResponse(HttpExchange httpExchange, int code, int length) throws IOException {
         httpExchange.sendResponseHeaders(code, length);
-}
+    }
 
     private byte[] readAllBytesFrom(InputStream inputStream) throws IOException {
         ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
