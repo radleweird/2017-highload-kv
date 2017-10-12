@@ -1,7 +1,13 @@
 package ru.mail.polis.radleweird.dao;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
-import java.security.InvalidParameterException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.NoSuchElementException;
 
 public class DaoSimple implements Dao {
 
@@ -12,16 +18,36 @@ public class DaoSimple implements Dao {
     }
 
     @Override
-    public void put(String key, byte[] object) {
+    public void put(@NotNull String key, byte[] object) throws IOException {
+        keyAcceptance(key);
+        Path path = Paths.get(dir.getPath(), key);
+
+        Files.write(path, object);
     }
 
     @Override
-    public byte[] get(String key) {
-        return null;
+    public byte[] get(@NotNull String key) throws IOException {
+        keyAcceptance(key);
+        Path path = Paths.get(dir.getPath(), key);
+
+        if (Files.notExists(path)) {
+            throw new NoSuchElementException();
+        }
+
+        return Files.readAllBytes(path);
     }
 
     @Override
-    public void delete(String key) {
+    public void delete(@NotNull String key) throws IOException {
+        keyAcceptance(key);
+        Path path = Paths.get(dir.getPath(), key);
 
+        Files.deleteIfExists(path);
+    }
+
+    private void keyAcceptance(String key) {
+        if (key.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
     }
 }
