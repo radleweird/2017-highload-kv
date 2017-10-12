@@ -1,7 +1,7 @@
 package ru.mail.polis.radleweird.dao;
 
-public interface Dao<T> {
-    void put(String key, T object);
-    T get(String key);
+public interface Dao {
+    void put(String key, byte[] data);
+    byte[] get(String key);
     void delete(String key);
 }

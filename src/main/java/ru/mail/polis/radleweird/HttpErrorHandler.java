@@ -14,12 +14,12 @@ public class HttpErrorHandler implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange httpExchange) throws IOException {
+    public void handle(HttpExchange httpExchange) {
         try {
             essence.handle(httpExchange);
         }
         //TODO
-        catch (Exception e) {
+        catch (Throwable t) {
 
         }
     }

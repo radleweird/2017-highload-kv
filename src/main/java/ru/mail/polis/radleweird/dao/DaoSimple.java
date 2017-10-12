@@ -1,22 +1,22 @@
 package ru.mail.polis.radleweird.dao;
 
 import java.io.File;
+import java.security.InvalidParameterException;
 
-public class DaoString implements Dao<String> {
+public class DaoSimple implements Dao {
 
     private final File dir;
 
-    public DaoString(File dir) {
+    public DaoSimple(File dir) {
         this.dir = dir;
     }
 
     @Override
-    public void put(String key, String object) {
-
+    public void put(String key, byte[] object) {
     }
 
     @Override
-    public String get(String key) {
+    public byte[] get(String key) {
         return null;
     }
 
