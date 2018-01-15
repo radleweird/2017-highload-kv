@@ -19,7 +19,7 @@ public class DaoSimple implements Dao {
 
     @Override
     public void put(@NotNull String key, byte[] object) throws IOException {
-        keyAcceptance(key);
+        throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
 
         Files.write(path, object);
@@ -27,7 +27,7 @@ public class DaoSimple implements Dao {
 
     @Override
     public byte[] get(@NotNull String key) throws IOException {
-        keyAcceptance(key);
+        throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
 
         if (Files.notExists(path)) {
@@ -39,13 +39,13 @@ public class DaoSimple implements Dao {
 
     @Override
     public void delete(@NotNull String key) throws IOException {
-        keyAcceptance(key);
+        throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
 
         Files.deleteIfExists(path);
     }
 
-    private void keyAcceptance(String key) {
+    private void throwIfEmpty(String key) {
         if (key.isEmpty()) {
             throw new IllegalArgumentException();
         }

@@ -37,10 +37,10 @@ public class KVServiceDefault implements KVService {
         server.stop(0);
     }
 
-    private void initStatusHandler() {
-        final int okCode = 200;
-        final byte[] response = "we're online, hurrah".getBytes();
+    private static final int okCode = 200;
+    private static final byte[] response = "we're online, hurrah".getBytes();
 
+    private void initStatusHandler() {
         server.createContext("/v0/status", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
@@ -50,24 +50,23 @@ public class KVServiceDefault implements KVService {
         });
     }
 
-    private final String QUERY_ID = "id";
+    private static final String QUERY_ID = "id";
+    private static final int getOkCode = 200;
+    private static final int getBadCode = 404;
+    private static final int putOkCode = 201;
+    private static final int deleteOkCode = 202;
+    private static final int badRequestCode = 400;
+    private static final int methodNotAllowedCode = 405;
 
     private void initGetPutDeleteHandler() {
         server.createContext("/v0/entity", new HttpHandler() {
             @Override
             public void handle(HttpExchange httpExchange) throws IOException {
-                final int getOkCode = 200;
-                final int getBadCode = 404;
-                final int putOkCode = 201;
-                final int deleteOkCode = 202;
-                final int badRequestCode = 400;
-                final int methodNotAllowedCode = 405;
-
-                Map<String, String> params = QueryWorker.getQueryPairs(httpExchange
+                final Map<String, String> params = QueryWorker.getQueryPairs(httpExchange
                         .getRequestURI()
                         .getQuery());
 
-                String method = httpExchange.getRequestMethod();
+                final String method = httpExchange.getRequestMethod();
                 try {
                     switch (method) {
                         case "GET":
@@ -96,7 +95,7 @@ public class KVServiceDefault implements KVService {
                             sendResponse(httpExchange, methodNotAllowedCode);
                     }
                 }
-                catch (IllegalArgumentException e) {
+                catch (IllegalArgumentException | IOException e) {
                     sendResponse(httpExchange, badRequestCode);
                 }
                 httpExchange.close();
