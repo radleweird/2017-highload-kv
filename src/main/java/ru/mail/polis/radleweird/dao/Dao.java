@@ -5,7 +5,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public interface Dao {
-    void put(@NotNull String key, byte[] data) throws IOException;
+    void put(@NotNull String key, @NotNull byte[] data) throws IOException;
+    @NotNull
     byte[] get(@NotNull String key) throws IOException;
     void delete(@NotNull String key) throws IOException;
 }

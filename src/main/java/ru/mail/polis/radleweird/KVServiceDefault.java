@@ -37,69 +37,63 @@ public class KVServiceDefault implements KVService {
         server.stop(0);
     }
 
-    private static final int okCode = 200;
-    private static final byte[] response = "we're online, hurrah".getBytes();
+    private static final int OK_CODE = 200;
+    private static final byte[] STATUS_RESPONSE = "we're online, hurrah".getBytes();
 
     private void initStatusHandler() {
-        server.createContext("/v0/status", new HttpHandler() {
-            @Override
-            public void handle(HttpExchange httpExchange) throws IOException {
-                sendResponse(httpExchange, okCode, response);
-                httpExchange.close();
-            }
+        server.createContext("/v0/status", httpExchange -> {
+            sendResponse(httpExchange, OK_CODE, STATUS_RESPONSE);
+            httpExchange.close();
         });
     }
 
     private static final String QUERY_ID = "id";
-    private static final int getOkCode = 200;
-    private static final int getBadCode = 404;
-    private static final int putOkCode = 201;
-    private static final int deleteOkCode = 202;
-    private static final int badRequestCode = 400;
-    private static final int methodNotAllowedCode = 405;
+    private static final int GET_OK_CODE = 200;
+    private static final int GET_BAD_CODE = 404;
+    private static final int PUT_OK_CODE = 201;
+    private static final int DELETE_OK_CODE = 202;
+    private static final int BAD_REQUEST_CODE = 400;
+    private static final int METHOD_NOT_ALLOWED_CODE = 405;
 
     private void initGetPutDeleteHandler() {
-        server.createContext("/v0/entity", new HttpHandler() {
-            @Override
-            public void handle(HttpExchange httpExchange) throws IOException {
-                final Map<String, String> params = QueryWorker.getQueryPairs(httpExchange
-                        .getRequestURI()
-                        .getQuery());
+        server.createContext("/v0/entity", httpExchange -> {
+            final Map<String, String> params = QueryWorker.getQueryPairs(httpExchange
+                    .getRequestURI()
+                    .getQuery());
 
-                final String method = httpExchange.getRequestMethod();
-                try {
-                    switch (method) {
-                        case "GET":
-                            try {
-                                byte[] data = dao.get(params.get(QUERY_ID));
-                                sendResponse(httpExchange, getOkCode, data);
-                            } catch (NoSuchElementException e) {
-                                sendResponse(httpExchange, getBadCode);
-                            }
-                            break;
+            final String method = httpExchange.getRequestMethod();
+            try {
+                switch (method) {
+                    case "GET":
+                        try {
+                            byte[] data = dao.get(params.get(QUERY_ID));
+                            sendResponse(httpExchange, GET_OK_CODE, data);
+                        } catch (NoSuchElementException e) {
+                            sendResponse(httpExchange, GET_BAD_CODE);
+                        }
+                        break;
 
-                        case "PUT":
-                            try (InputStream inputStream = httpExchange.getRequestBody()) {
-                                byte[] data = readAllBytesFrom(inputStream);
-                                dao.put(params.get(QUERY_ID), data);
-                                sendResponse(httpExchange, putOkCode);
-                            }
-                            break;
+                    case "PUT":
+                        try (InputStream inputStream = httpExchange.getRequestBody()) {
+                            byte[] data = readAllBytesFrom(inputStream);
+                            dao.put(params.get(QUERY_ID), data);
+                            sendResponse(httpExchange, PUT_OK_CODE);
+                        }
+                        break;
 
-                        case "DELETE":
-                            dao.delete(params.get(QUERY_ID));
-                            sendResponse(httpExchange, deleteOkCode);
-                            break;
+                    case "DELETE":
+                        dao.delete(params.get(QUERY_ID));
+                        sendResponse(httpExchange, DELETE_OK_CODE);
+                        break;
 
-                        default:
-                            sendResponse(httpExchange, methodNotAllowedCode);
-                    }
+                    default:
+                        sendResponse(httpExchange, METHOD_NOT_ALLOWED_CODE);
                 }
-                catch (IllegalArgumentException | IOException e) {
-                    sendResponse(httpExchange, badRequestCode);
-                }
-                httpExchange.close();
             }
+            catch (IllegalArgumentException | IOException e) {
+                sendResponse(httpExchange, BAD_REQUEST_CODE);
+            }
+            httpExchange.close();
         });
     }
 

@@ -18,7 +18,7 @@ public class DaoSimple implements Dao {
     }
 
     @Override
-    public void put(@NotNull String key, byte[] object) throws IOException {
+    public void put(@NotNull String key, @NotNull byte[] object) throws IOException {
         throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
 
@@ -26,6 +26,7 @@ public class DaoSimple implements Dao {
     }
 
     @Override
+    @NotNull
     public byte[] get(@NotNull String key) throws IOException {
         throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
