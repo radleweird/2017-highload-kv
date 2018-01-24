@@ -25,22 +25,10 @@ public class DaoSimple implements Dao {
                     @Override
                     public ByteBuffer load(String key) throws Exception {
                         Path path = Paths.get(dir.getPath(), key);
-                        if (Files.notExists(path)) {
-                            /* Workaround:
-                               Загрузка выполняется в background, нельзя бросить исключение
-                               и вернуть управление в метод DaoSimple.get()
-                               Просто возвращаем null и проверяем его в DaoSimple.get()
-                             */
-                            return null;
-                        }
                         return ByteBuffer.wrap(Files.readAllBytes(path));
                     }
                 })
-                // По умолчанию cache2k не разрешает хранить null
-                .permitNullValues(true)
-                // Сохраняем навсегда
                 .eternal(true)
-                // Максимальная вместительность
                 .entryCapacity(5000)
                 .build();
     }
@@ -58,13 +46,13 @@ public class DaoSimple implements Dao {
     @NotNull
     public byte[] get(@NotNull String key) {
         throwIfEmpty(key);
+        Path path = Paths.get(dir.getPath(), key);
 
-        ByteBuffer byteBuffer = cache.get(key);
-        if (byteBuffer != null) {
-            return byteBuffer.array();
-        } else {
+        if (Files.notExists(path)) {
             throw new NoSuchElementException();
         }
+
+        return cache.get(key).array();
     }
 
     @Override
@@ -72,8 +60,9 @@ public class DaoSimple implements Dao {
         throwIfEmpty(key);
         Path path = Paths.get(dir.getPath(), key);
 
-        Files.deleteIfExists(path);
-        cache.remove(key);
+        if (Files.deleteIfExists(path)) {
+            cache.remove(key);
+        }
     }
 
     private void throwIfEmpty(String key) {

@@ -15,16 +15,16 @@ wrk --latency -c1 -t1 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    20.06ms   39.19ms 414.98ms   90.42%
-    Req/Sec    80.80     31.23   131.00     75.75%
+    Latency    19.21ms   35.94ms 347.69ms   89.95%
+    Req/Sec    82.00     30.21   121.00     78.90%
   Latency Distribution
-     50%    5.96ms
-     75%    8.19ms
-     90%   56.22ms
-     99%  197.09ms
-  4658 requests in 1.00m, 427.59KB read
-Requests/sec:     77.57
-Transfer/sec:      7.12KB
+     50%    5.84ms
+     75%    7.58ms
+     90%   55.26ms
+     99%  184.42ms
+  4736 requests in 1.00m, 434.75KB read
+Requests/sec:     78.82
+Transfer/sec:      7.24KB
 ```
 
 #### соединения = потоки = 2
@@ -33,16 +33,16 @@ wrk --latency -c2 -t2 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    20.54ms   39.79ms 436.87ms   90.53%
-    Req/Sec    76.16     28.95   121.00     69.80%
+    Latency    20.17ms   38.09ms 372.27ms   90.22%
+    Req/Sec    76.40     29.00   120.00     68.97%
   Latency Distribution
-     50%    6.10ms
-     75%    8.86ms
-     90%   57.73ms
-     99%  208.26ms
-  8780 requests in 1.00m, 805.98KB read
-Requests/sec:    146.14
-Transfer/sec:     13.42KB
+     50%    6.08ms
+     75%    8.88ms
+     90%   57.40ms
+     99%  197.03ms
+  8819 requests in 1.00m, 809.56KB read
+Requests/sec:    146.79
+Transfer/sec:     13.47KB
 ```
 
 #### соединения = потоки = 4
@@ -51,16 +51,16 @@ wrk --latency -c4 -t4 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    22.02ms   43.34ms 447.29ms   90.46%
-    Req/Sec    73.91     28.76   111.00     72.78%
+    Latency    19.96ms   37.28ms 350.89ms   90.08%
+    Req/Sec    76.38     29.04   121.00     68.69%
   Latency Distribution
-     50%    6.40ms
-     75%   10.66ms
-     90%   61.55ms
-     99%  227.88ms
-  16939 requests in 1.00m, 1.52MB read
-Requests/sec:    282.02
-Transfer/sec:     25.89KB
+     50%    6.22ms
+     75%    9.40ms
+     90%   56.89ms
+     99%  192.30ms
+  17639 requests in 1.00m, 1.58MB read
+Requests/sec:    293.51
+Transfer/sec:     26.94KB
 ```
 
 ### PUT c перезаписью
@@ -71,16 +71,16 @@ wrk --latency -c1 -t1 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    20.86ms   39.69ms 367.95ms   89.99%
-    Req/Sec    77.22     29.14   118.00     67.62%
+    Latency    20.19ms   37.65ms 342.31ms   89.89%
+    Req/Sec    78.28     29.84   121.00     68.32%
   Latency Distribution
      50%    6.09ms
-     75%    8.85ms
-     90%   60.56ms
-     99%  205.71ms
-  4444 requests in 1.00m, 407.95KB read
-Requests/sec:     73.96
-Transfer/sec:      6.79KB
+     75%    8.66ms
+     90%   58.60ms
+     99%  192.23ms
+  4509 requests in 1.00m, 413.91KB read
+Requests/sec:     75.07
+Transfer/sec:      6.89KB
 ```
 
 #### соединения = потоки = 2
@@ -89,16 +89,16 @@ wrk --latency -c2 -t2 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    20.57ms   39.15ms 371.49ms   89.95%
-    Req/Sec    77.39     28.78   111.00     69.02%
+    Latency    19.39ms   36.44ms 343.02ms   89.88%
+    Req/Sec    80.96     30.39   121.00     77.43%
   Latency Distribution
-     50%    5.96ms
-     75%    8.35ms
-     90%   60.35ms
-     99%  202.71ms
-  8887 requests in 1.00m, 815.89KB read
-Requests/sec:    148.03
-Transfer/sec:     13.59KB
+     50%    5.69ms
+     75%    7.55ms
+     90%   56.97ms
+     99%  187.54ms
+  9365 requests in 1.00m, 859.68KB read
+Requests/sec:    155.87
+Transfer/sec:     14.31KB
 ```
 
 #### соединения = потоки = 4
@@ -107,16 +107,16 @@ wrk --latency -c4 -t4 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    20.68ms   39.72ms 369.38ms   89.92%
-    Req/Sec    78.65     30.07   121.00     70.24%
+    Latency    19.68ms   36.99ms 349.90ms   89.93%
+    Req/Sec    78.40     29.93   121.00     70.27%
   Latency Distribution
-     50%    6.00ms
-     75%    8.37ms
-     90%   60.84ms
-     99%  207.89ms
-  18046 requests in 1.00m, 1.62MB read
-Requests/sec:    300.39
-Transfer/sec:     27.58KB
+     50%    5.94ms
+     75%    8.76ms
+     90%   57.04ms
+     99%  191.36ms
+  18167 requests in 1.00m, 1.63MB read
+Requests/sec:    302.28
+Transfer/sec:     27.75KB
 ```
 
 ### GET без повторов
@@ -127,17 +127,17 @@ wrk --latency -c1 -t1 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    14.31ms   42.63ms 468.88ms   91.86%
-    Req/Sec     2.01k     3.31k    8.69k    75.91%
+    Latency    13.93ms   40.56ms 443.68ms   91.50%
+    Req/Sec     2.11k     3.41k    8.67k    74.87%
   Latency Distribution
-     50%  145.00us
-     75%    4.28ms
-     90%   43.18ms
-     99%  227.03ms
-  110444 requests in 1.00m, 429.52MB read
+     50%  137.00us
+     75%    4.52ms
+     90%   42.51ms
+     99%  206.45ms
+  117380 requests in 1.00m, 456.50MB read
   Non-2xx or 3xx responses: 1
-Requests/sec:   1840.60
-Transfer/sec:      7.16MB
+Requests/sec:   1955.76
+Transfer/sec:      7.61MB
 ```
 
 #### соединения = потоки = 2
@@ -146,17 +146,17 @@ wrk --latency -c2 -t2 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency    11.89ms   34.73ms 338.32ms   91.64%
-    Req/Sec     2.02k     2.37k    5.18k    61.34%
+    Latency    12.35ms   47.93ms 737.06ms   94.02%
+    Req/Sec     2.20k     2.43k    5.38k    60.60%
   Latency Distribution
-     50%  202.00us
-     75%    3.67ms
-     90%   34.83ms
-     99%  185.42ms
-  229112 requests in 1.00m, 0.87GB read
+     50%  201.00us
+     75%    3.53ms
+     90%   27.89ms
+     99%  206.52ms
+  249655 requests in 1.00m, 0.95GB read
   Non-2xx or 3xx responses: 3
-Requests/sec:   3812.71
-Transfer/sec:     14.83MB
+Requests/sec:   4154.64
+Transfer/sec:     16.16MB
 ```
 
 #### соединения = потоки = 4
@@ -165,17 +165,17 @@ wrk --latency -c4 -t4 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     7.21ms   28.57ms 457.64ms   94.31%
-    Req/Sec     2.00k     1.16k    3.04k    73.27%
+    Latency     5.51ms   25.82ms 465.25ms   95.58%
+    Req/Sec     2.18k     1.13k    3.08k    77.30%
   Latency Distribution
-     50%  410.00us
-     75%  567.00us
-     90%    8.73ms
-     99%  133.47ms
-  464670 requests in 1.00m, 1.76GB read
+     50%  376.00us
+     75%  507.00us
+     90%    5.42ms
+     99%  115.53ms
+  513081 requests in 1.00m, 1.95GB read
   Non-2xx or 3xx responses: 7
-Requests/sec:   7737.48
-Transfer/sec:     30.09MB
+Requests/sec:   8545.38
+Transfer/sec:     33.23MB
 ```
 
 ### GET c повторами
@@ -186,17 +186,17 @@ wrk --latency -c1 -t1 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     3.00ms    7.29ms  44.47ms   87.65%
-    Req/Sec     7.01k     1.10k    9.47k    70.00%
+    Latency   147.79us  553.34us  28.66ms   98.97%
+    Req/Sec     8.76k   678.95     9.53k    88.33%
   Latency Distribution
-     50%   98.00us
-     75%  127.00us
-     90%   14.40ms
-     99%   30.17ms
-  418813 requests in 1.00m, 1.59GB read
-  Non-2xx or 3xx responses: 418
-Requests/sec:   6975.58
-Transfer/sec:     27.10MB
+     50%  101.00us
+     75%  104.00us
+     90%  123.00us
+     99%  797.00us
+  522763 requests in 1.00m, 1.99GB read
+  Non-2xx or 3xx responses: 104
+Requests/sec:   8712.62
+Transfer/sec:     33.88MB
 ```
 
 #### соединения = потоки = 2
@@ -205,17 +205,17 @@ wrk --latency -c2 -t2 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     3.49ms    7.95ms  64.20ms   86.90%
-    Req/Sec     3.85k     1.29k    5.49k    56.25%
+    Latency   226.67us  508.31us  33.28ms   98.73%
+    Req/Sec     5.14k   398.96     5.58k    87.83%
   Latency Distribution
-     50%  180.00us
-     75%  226.00us
-     90%   16.53ms
-     99%   31.30ms
-  460054 requests in 1.00m, 1.75GB read
-  Non-2xx or 3xx responses: 460
-Requests/sec:   7662.86
-Transfer/sec:     29.77MB
+     50%  178.00us
+     75%  184.00us
+     90%  205.00us
+     99%    1.26ms
+  613631 requests in 1.00m, 2.33GB read
+  Non-2xx or 3xx responses: 123
+Requests/sec:  10226.76
+Transfer/sec:     39.76MB
 ```
 
 #### соединения = потоки = 4
@@ -224,15 +224,246 @@ wrk --latency -c4 -t4 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
   Thread Stats   Avg      Stdev     Max   +/- Stdev
-    Latency     3.91ms    8.35ms 110.95ms   86.44%
-    Req/Sec     2.06k     0.90k    3.12k    70.03%
+    Latency   400.34us  622.39us  42.91ms   98.53%
+    Req/Sec     2.78k   230.63     3.48k    87.81%
   Latency Distribution
-     50%  377.00us
-     75%  521.00us
-     90%   17.81ms
-     99%   31.79ms
-  493118 requests in 1.00m, 1.87GB read
-  Non-2xx or 3xx responses: 495
-Requests/sec:   8212.31
-Transfer/sec:     31.91MB
+     50%  338.00us
+     75%  422.00us
+     90%  504.00us
+     99%    2.14ms
+  663796 requests in 1.00m, 2.52GB read
+  Non-2xx or 3xx responses: 135
+Requests/sec:  11044.92
+Transfer/sec:     42.95MB
+```
+
+## После оптимизации
+### PUT без перезаписи
+
+#### соединения = потоки = 1
+```
+wrk --latency -c1 -t1 -d1m -s scripts/unique_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  1 threads and 1 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    22.54ms   43.38ms 438.17ms   90.31%
+    Req/Sec    73.10     27.52   111.00     71.89%
+  Latency Distribution
+     50%    6.63ms
+     75%    9.56ms
+     90%   64.34ms
+     99%  224.24ms
+  4178 requests in 1.00m, 383.53KB read
+Requests/sec:     69.55
+Transfer/sec:      6.38KB
+```
+
+#### соединения = потоки = 2
+```
+wrk --latency -c2 -t2 -d1m -s scripts/unique_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  2 threads and 2 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    20.48ms   38.31ms 362.51ms   90.08%
+    Req/Sec    75.40     28.12   111.00     75.16%
+  Latency Distribution
+     50%    6.23ms
+     75%    8.46ms
+     90%   58.15ms
+     99%  197.62ms
+  8705 requests in 1.00m, 799.09KB read
+Requests/sec:    144.89
+Transfer/sec:     13.30KB
+```
+
+#### соединения = потоки = 4
+```
+wrk --latency -c4 -t4 -d1m -s scripts/unique_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  4 threads and 4 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    20.77ms   38.80ms 355.16ms   90.09%
+    Req/Sec    73.70     27.97   111.00     75.03%
+  Latency Distribution
+     50%    6.55ms
+     75%   10.27ms
+     90%   59.06ms
+     99%  203.03ms
+  16975 requests in 1.00m, 1.52MB read
+Requests/sec:    282.69
+Transfer/sec:     25.95KB
+```
+
+### PUT c перезаписью
+
+#### соединения = потоки = 1
+```
+wrk --latency -c1 -t1 -d1m -s scripts/repeated_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  1 threads and 1 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    20.56ms   38.67ms 361.72ms   90.04%
+    Req/Sec    76.63     29.30   121.00     68.74%
+  Latency Distribution
+     50%    6.19ms
+     75%    8.57ms
+     90%   58.77ms
+     99%  200.51ms
+  4409 requests in 1.00m, 404.73KB read
+Requests/sec:     73.47
+Transfer/sec:      6.74KB
+```
+
+#### соединения = потоки = 2
+```
+wrk --latency -c2 -t2 -d1m -s scripts/repeated_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  2 threads and 2 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    20.03ms   38.00ms 365.09ms   90.16%
+    Req/Sec    78.26     29.71   121.00     67.84%
+  Latency Distribution
+     50%    5.99ms
+     75%    8.05ms
+     90%   56.96ms
+     99%  195.83ms
+  9044 requests in 1.00m, 830.21KB read
+Requests/sec:    150.55
+Transfer/sec:     13.82KB
+```
+
+#### соединения = потоки = 4
+```
+wrk --latency -c4 -t4 -d1m -s scripts/repeated_put.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  4 threads and 4 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    20.52ms   39.13ms 364.07ms   90.18%
+    Req/Sec    76.96     29.12   121.00     70.22%
+  Latency Distribution
+     50%    6.18ms
+     75%    9.33ms
+     90%   58.69ms
+     99%  202.68ms
+  17705 requests in 1.00m, 1.59MB read
+Requests/sec:    294.63
+Transfer/sec:     27.05KB
+```
+
+### GET без повторов
+
+#### соединения = потоки = 1
+```
+wrk --latency -c1 -t1 -d1m -s scripts/unique_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  1 threads and 1 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    13.03ms   38.15ms 437.27ms   91.85%
+    Req/Sec     2.03k     3.37k    8.93k    75.81%
+  Latency Distribution
+     50%  142.00us
+     75%    4.66ms
+     90%   37.57ms
+     99%  201.18ms
+  112722 requests in 1.00m, 438.38MB read
+  Non-2xx or 3xx responses: 1
+Requests/sec:   1876.72
+Transfer/sec:      7.30MB
+```
+
+#### соединения = потоки = 2
+```
+wrk --latency -c2 -t2 -d1m -s scripts/unique_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  2 threads and 2 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    14.15ms   40.90ms 447.94ms   91.13%
+    Req/Sec     2.19k     2.66k    6.24k    65.83%
+  Latency Distribution
+     50%  189.00us
+     75%    4.15ms
+     90%   45.73ms
+     99%  213.78ms
+  242205 requests in 1.00m, 0.92GB read
+  Non-2xx or 3xx responses: 3
+Requests/sec:   4036.40
+Transfer/sec:     15.70MB
+```
+
+#### соединения = потоки = 4
+```
+wrk --latency -c4 -t4 -d1m -s scripts/unique_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  4 threads and 4 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    10.51ms   35.57ms 448.14ms   92.97%
+    Req/Sec     2.23k     1.64k    4.00k    62.26%
+  Latency Distribution
+     50%  315.00us
+     75%    1.88ms
+     90%   20.84ms
+     99%  188.60ms
+  507527 requests in 1.00m, 1.93GB read
+  Non-2xx or 3xx responses: 7
+Requests/sec:   8448.11
+Transfer/sec:     32.85MB
+```
+
+### GET c повторами
+
+#### соединения = потоки = 1
+```
+wrk --latency -c1 -t1 -d1m -s scripts/repeated_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  1 threads and 1 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   122.11us  433.64us  15.17ms   98.51%
+    Req/Sec    11.78k     1.16k   12.85k    94.67%
+  Latency Distribution
+     50%   70.00us
+     75%   73.00us
+     90%   98.00us
+     99%    1.91ms
+  702975 requests in 1.00m, 2.67GB read
+  Non-2xx or 3xx responses: 140
+Requests/sec:  11715.37
+Transfer/sec:     45.55MB
+```
+
+#### соединения = потоки = 2
+```
+wrk --latency -c2 -t2 -d1m -s scripts/repeated_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  2 threads and 2 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   178.72us  479.68us  21.75ms   98.19%
+    Req/Sec     7.54k   716.47     8.10k    92.42%
+  Latency Distribution
+     50%  118.00us
+     75%  120.00us
+     90%  141.00us
+     99%    2.68ms
+  900258 requests in 1.00m, 3.42GB read
+  Non-2xx or 3xx responses: 180
+Requests/sec:  15003.66
+Transfer/sec:     58.34MB
+```
+
+#### соединения = потоки = 4
+```
+wrk --latency -c4 -t4 -d1m -s scripts/repeated_get.lua http://localhost:8080
+Running 1m test @ http://localhost:8080
+  4 threads and 4 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency   290.49us  567.63us  33.57ms   97.89%
+    Req/Sec     4.25k   444.18     5.75k    88.72%
+  Latency Distribution
+     50%  217.00us
+     75%  272.00us
+     90%  326.00us
+     99%    3.24ms
+  1016529 requests in 1.00m, 3.86GB read
+  Non-2xx or 3xx responses: 203
+Requests/sec:  16914.26
+Transfer/sec:     65.77MB
 ```

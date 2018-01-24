@@ -1,6 +1,6 @@
 counter = 0
 wrk.method = "GET"
-repeat_each = 10000
+repeat_each = 5000
 
 request = function()
    path = "/v0/entity?id=" .. counter
