@@ -1,13 +1,16 @@
 # Этап 3. Нагрузочное тестирование и оптимизация
+```
 Нагрузку подавали с помощью инструмента нагрузочного тесирования - wrk
 Подавали запросы только PUT: соединения = потоки = 1, 2, 4 c/без перезаписи
 Подавали запросы только GET: соединения = потоки = 1, 2, 4 на большом наборе ключей с/без повторов
 Для запросов GET на сервер заранее были загружены 150000 файлов
 Все нагрузки подавали длительностью 1 минута
+```
 ## До оптимизации
 ### PUT без перезаписи
 
 #### соединения = потоки = 1
+```
 wrk --latency -c1 -t1 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
@@ -22,8 +25,10 @@ Running 1m test @ http://localhost:8080
   4658 requests in 1.00m, 427.59KB read
 Requests/sec:     77.57
 Transfer/sec:      7.12KB
+```
 
 #### соединения = потоки = 2
+```
 wrk --latency -c2 -t2 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
@@ -38,8 +43,10 @@ Running 1m test @ http://localhost:8080
   8780 requests in 1.00m, 805.98KB read
 Requests/sec:    146.14
 Transfer/sec:     13.42KB
+```
 
 #### соединения = потоки = 4
+```
 wrk --latency -c4 -t4 -d1m -s scripts/unique_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
@@ -54,10 +61,12 @@ Running 1m test @ http://localhost:8080
   16939 requests in 1.00m, 1.52MB read
 Requests/sec:    282.02
 Transfer/sec:     25.89KB
+```
 
 ### PUT c перезаписью
 
 #### соединения = потоки = 1
+```
 wrk --latency -c1 -t1 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
@@ -72,8 +81,10 @@ Running 1m test @ http://localhost:8080
   4444 requests in 1.00m, 407.95KB read
 Requests/sec:     73.96
 Transfer/sec:      6.79KB
+```
 
 #### соединения = потоки = 2
+```
 wrk --latency -c2 -t2 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
@@ -88,8 +99,10 @@ Running 1m test @ http://localhost:8080
   8887 requests in 1.00m, 815.89KB read
 Requests/sec:    148.03
 Transfer/sec:     13.59KB
+```
 
 #### соединения = потоки = 4
+```
 wrk --latency -c4 -t4 -d1m -s scripts/repeated_put.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
@@ -104,10 +117,12 @@ Running 1m test @ http://localhost:8080
   18046 requests in 1.00m, 1.62MB read
 Requests/sec:    300.39
 Transfer/sec:     27.58KB
+```
 
 ### GET без повторов
 
 #### соединения = потоки = 1
+```
 wrk --latency -c1 -t1 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
@@ -123,8 +138,10 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 1
 Requests/sec:   1840.60
 Transfer/sec:      7.16MB
+```
 
 #### соединения = потоки = 2
+```
 wrk --latency -c2 -t2 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
@@ -140,8 +157,10 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 3
 Requests/sec:   3812.71
 Transfer/sec:     14.83MB
+```
 
 #### соединения = потоки = 4
+```
 wrk --latency -c4 -t4 -d1m -s scripts/unique_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
@@ -157,10 +176,12 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 7
 Requests/sec:   7737.48
 Transfer/sec:     30.09MB
+```
 
 ### GET c повторами
 
 #### соединения = потоки = 1
+```
 wrk --latency -c1 -t1 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   1 threads and 1 connections
@@ -176,8 +197,10 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 418
 Requests/sec:   6975.58
 Transfer/sec:     27.10MB
+```
 
 #### соединения = потоки = 2
+```
 wrk --latency -c2 -t2 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   2 threads and 2 connections
@@ -193,8 +216,10 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 460
 Requests/sec:   7662.86
 Transfer/sec:     29.77MB
+```
 
 #### соединения = потоки = 4
+```
 wrk --latency -c4 -t4 -d1m -s scripts/repeated_get.lua http://localhost:8080
 Running 1m test @ http://localhost:8080
   4 threads and 4 connections
@@ -210,3 +235,4 @@ Running 1m test @ http://localhost:8080
   Non-2xx or 3xx responses: 495
 Requests/sec:   8212.31
 Transfer/sec:     31.91MB
+```
