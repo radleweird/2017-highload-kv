@@ -1,7 +1,6 @@
 package ru.mail.polis.radleweird;
 
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import ru.mail.polis.KVService;
 import ru.mail.polis.radleweird.dao.Dao;

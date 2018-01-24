@@ -3,8 +3,6 @@ package ru.mail.polis.radleweird.dao;
 import org.cache2k.Cache;
 import org.cache2k.Cache2kBuilder;
 import org.cache2k.integration.CacheLoader;
-import org.cache2k.integration.ExceptionInformation;
-import org.cache2k.integration.ExceptionPropagator;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -29,21 +27,16 @@ public class DaoSimple implements Dao {
                         Path path = Paths.get(dir.getPath(), key);
                         if (Files.notExists(path)) {
                             /* Workaround:
-                               загрузка выполняется в background, нельзя бросить переключение
-                               и вернуть управление в метод DaoSimple.put
+                               Загрузка выполняется в background, нельзя бросить исключение
+                               и вернуть управление в метод DaoSimple.get()
+                               Просто возвращаем null и проверяем его в DaoSimple.get()
                              */
                             return null;
                         }
                         return ByteBuffer.wrap(Files.readAllBytes(path));
                     }
                 })
-                .exceptionPropagator(new ExceptionPropagator<String>() {
-                    @Override
-                    public RuntimeException propagateException(String key, ExceptionInformation exceptionInformation) {
-                        return new NoSuchElementException();
-                    }
-                })
-                // По умолчанию cache2k не разрешает хранить null-данные
+                // По умолчанию cache2k не разрешает хранить null
                 .permitNullValues(true)
                 // Сохраняем навсегда
                 .eternal(true)
@@ -84,7 +77,7 @@ public class DaoSimple implements Dao {
     }
 
     private void throwIfEmpty(String key) {
-        if (key.isEmpty()) {
+        if ("".equals(key)) {
             throw new IllegalArgumentException();
         }
     }
