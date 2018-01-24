@@ -8,11 +8,15 @@ plugins {
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
     // Annotations for better code documentation
     compile("com.intellij:annotations:12.0")
+
+    // Cache for speeding up repeated requests
+    compile("org.cache2k:cache2k-core:1.0.2.Final")
 
     // JUnit test framework
     testCompile("junit:junit:4.12")
